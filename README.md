@@ -4,4 +4,16 @@ create react app
 
 react bootstrap
 
-react slick -->
+react slick 
+
+react-router
+
+react-router-dom
+
+react-router-transition
+
+fontawesome.css
+
+animate.min.css
+
+-->
