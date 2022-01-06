@@ -13,5 +13,13 @@
 font-family: 'Open Sans', sans-serif; */
 
 body{
-    background-color: red;
+    background-color: #f6f6f6;
+    font-family: 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+}
+
+a,
+p{
+    font-family: 'Nunito', sans-serif !important;
 }
