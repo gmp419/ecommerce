@@ -1,0 +1,24 @@
+.footerback{
+    background-color: #e9e9e9;
+}
+.footer-text{
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.footer-link{
+    text-decoration: none;
+    color: #000000;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.footer-link:hover{
+    text-decoration: none;
+    color: #051b35;
+}
+
+.footer-menu-title{
+    font-size: 18px;
+    color: #000000;
+        font-weight: 600;
+} 
