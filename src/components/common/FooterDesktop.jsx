@@ -12,7 +12,7 @@ export class FooterDesktop extends Component {
           <Container>
             <Row className="px-o">
               <Col className="p-2" lg={3} md={3} sm={6} xs={12}>
-                <h5 className="text-uppercase footer-menu-title">
+                <h5 className="text-capitalize footer-menu-title">
                   Office Address
                 </h5>
                 <p>
@@ -31,8 +31,8 @@ export class FooterDesktop extends Component {
                 </a>
               </Col>
               <Col className="p-2" lg={3} md={3} sm={6} xs={12}>
-                <h5 className="text-uppercase footer-menu-title">Link</h5>
-                <Link to="/" className="footer-link">
+                <h5 className="text-capitalize footer-menu-title">Link</h5>
+                <Link to="/contact" className="footer-link">
                   About us
                 </Link>
                 <br />
@@ -45,22 +45,22 @@ export class FooterDesktop extends Component {
                 </Link>
               </Col>
               <Col className="p-2" lg={3} md={3} sm={6} xs={12}>
-                <h5 className="text-uppercase footer-menu-title">Link</h5>
-                <Link to="/" className="footer-link">
-                  About us
+                <h5 className="text-capitalize footer-menu-title">Knowledge Base</h5>
+                <Link to="/purchase" className="footer-link">
+                  How to purchase?
                 </Link>
                 <br />
-                <Link to="/" className="footer-link">
-                  Our Profile
+                <Link to="/privacy" className="footer-link">
+                  Privacy policy
                 </Link>
                 <br />
-                <Link to="/" className="footer-link">
-                  Contact us
+                <Link to="/refund" className="footer-link">
+                  Ask for refund?
                 </Link>
               </Col>
 
               <Col className="p-2" lg={3} md={3} sm={6} xs={12}>
-                <h5 className="text-uppercase footer-menu-title">
+                <h5 className="text-capitalize footer-menu-title">
                   Ecommerce App
                 </h5>
                 <a href="">

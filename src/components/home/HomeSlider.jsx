@@ -10,7 +10,7 @@ import Slider3 from "../../assets/images/slider/slider3.jpg";
 export class HomeSlider extends Component {
   render() {
     var settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       autoplay: true,
@@ -18,7 +18,7 @@ export class HomeSlider extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       initialSlide: 0,
-    //   arrows: true
+      arrows: false,
       responsive: [
         {
           breakpoint: 1024,

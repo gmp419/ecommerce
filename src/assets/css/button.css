@@ -12,6 +12,13 @@
     background: #051b35 !important;
 }
 
+.site-btn-login{
+    padding: 5px 20px !important;
+    border-radius: 5% !important;
+}
+
+
+
 .site-btn:active{
     background: #051b35 !important;
 }
