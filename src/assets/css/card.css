@@ -17,6 +17,7 @@
     overflow: hidden;
     width: 100% !important;
 }
+
 .image-box img {
     width: 150px !important;
     transition: all 0.3s;

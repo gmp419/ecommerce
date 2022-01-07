@@ -4,8 +4,9 @@ import FooterDesktop from "../components/common/FooterDesktop";
 import FooterMobile from "../components/common/FooterMobile";
 import NavMenuDesktop from "../components/common/NavMenuDesktop";
 import NavMenuMobile from "../components/common/NavMenuMobile";
-
-export class ContactPage extends Component {
+import ProductDetail from "../components/ProductDetails/ProductDetail";
+import SuggestedProduct from "../components/ProductDetails/SuggestedProduct";
+export class ProductDetailsPage extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -18,7 +19,8 @@ export class ContactPage extends Component {
         <div className="mobile">
           <NavMenuMobile />
         </div>
-        <Contact />
+        <ProductDetail />
+        <SuggestedProduct/>
         <div className="desktop">
           <FooterDesktop />
         </div>
@@ -30,4 +32,4 @@ export class ContactPage extends Component {
   }
 }
 
-export default ContactPage;
+export default ProductDetailsPage;
