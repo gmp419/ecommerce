@@ -83,9 +83,9 @@ export class NavMenuDesktop extends Component {
                     LOGIN
                   </Link>
 
-                  <Button className="cart-btn">
+                  <Link to="cart" className="cart-btn d-flex justify-content-center align-items-center text-decoration-none">
                     <i className="fa fa-shopping-cart"></i> 3{" "}
-                  </Button>
+                  </Link>
                 </Col>
               </Row>
             </Container>

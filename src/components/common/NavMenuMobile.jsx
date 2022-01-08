@@ -44,9 +44,9 @@ export class NavMenuMobile extends Component {
                   <img className="nav-logo" src={logo} />
                 </Link>
 
-                <Button className="cart-btn ms-auto">
+                <Link to="cart" className="cart-btn d-flex text-decoration-none justify-content-center align-items-center ms-auto">
                   <i className="fa fa-shopping-cart"></i>&nbsp; 3
-                </Button>
+                </Link>
               </Col>
             </Row>
           </Container>
