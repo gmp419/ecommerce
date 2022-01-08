@@ -36,11 +36,11 @@ export class NavMenuDesktop extends Component {
               className="fixed-top zindex shadow-sm p-2 mb-0 bg-white"
             >
               <Row className="align-items-center p-1 mt-1">
-                <Col className="d-inline-flex" lg={4} md={4} sm={12} xs={12}>
+                <Col className="d-inline-flex align-items-center" lg={4} md={4} sm={12} xs={12}>
                   <Button className="btn site-btn p-2" onClick={this.MenuClick}>
                     <i className="fa fa-bars"></i>
                   </Button>
-                  <Link to="/">
+                  <Link to="/" className="mb-0">
                     {" "}
                     <img className="nav-logo" src={logo} />{" "}
                   </Link>
@@ -57,33 +57,33 @@ export class NavMenuDesktop extends Component {
                 </Col>
 
                 <Col
-                  className="align-content-around d-flex justify-content-center"
+                  className="d-flex align-items-center"
                   lg={4}
                   md={4}
                   sm={12}
                   xs={12}
                 >
               
-                  <Link to="/notification" className="btn">
+                  <Link to="/notification" className="btn mb-0">
                     <i className="fa h4 fa-bell"></i>
                     <sup>
                       <span className="badge text-white bg-danger">5</span>
                     </sup>
                   </Link>
-                  <Link to="/favourite" className="btn">
+                  <Link to="/favourite" className="btn mb-0">
                     <i className="fa h4 fa-heart"></i>
                     <sup>
                       <span className="badge text-white bg-danger">2</span>
                     </sup>
                   </Link>
-                  <a className="btn">
+                  <a className="btn mb-0 ">
                     <i className="fa h4 fa-mobile-alt"></i>
                   </a>
-                  <Link to="/login" className="h4 btn">
+                  <Link to="/login" className="h4 btn mb-0">
                     LOGIN
                   </Link>
 
-                  <Link to="cart" className="cart-btn d-flex justify-content-center align-items-center text-decoration-none">
+                  <Link to="cart" className="cart-btn mb-0 d-flex justify-content-center align-items-center text-decoration-none">
                     <i className="fa fa-shopping-cart"></i> 3{" "}
                   </Link>
                 </Col>

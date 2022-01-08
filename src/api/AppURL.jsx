@@ -5,6 +5,8 @@ class AppURL{
     static getVisitors = this.BaseURL + "/getvisitor"
 
     static contact_us = this.BaseURL + "/contact-us"
+
+    static siteInfo = this.BaseURL + "/site-info"
     
 }
 

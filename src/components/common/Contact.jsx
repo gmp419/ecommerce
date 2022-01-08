@@ -59,7 +59,6 @@ export class Contact extends Component {
         .post(AppURL.contact_us, MyFormData)
         .then((res) => {
           if (res.status == 200) {
-            console.log(res);
             toast.success(
               "Thank you for contacting us. We will get back to you soon!",
               {

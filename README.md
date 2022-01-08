@@ -16,4 +16,12 @@ fontawesome.css
 
 animate.min.css
 
+axios
+
+react-toastify
+
+react-html-parser
+
+placeholder-loading
+
 -->

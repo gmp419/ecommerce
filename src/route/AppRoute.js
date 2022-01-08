@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Route, Switch } from 'react-router'
+import AboutPage from '../pages/AboutPage'
 import CartPage from '../pages/CartPage'
 import ContactPage from '../pages/ContactPage'
 import FavouritePage from '../pages/FavouritePage'
@@ -26,6 +27,7 @@ export class AppRoute extends Component {
                     <Route exact path="/notification" component={NotificationPage} />
                     <Route exact path="/favourite" component={FavouritePage} />
                     <Route exact path="/cart" component={CartPage} />
+                    <Route exact path="/about-us" component={AboutPage} />
                 </Switch>
             </Fragment>
         )

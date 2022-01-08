@@ -1,24 +1,16 @@
+import axios from "axios";
 import React, { Component, Fragment } from "react";
-import {
-  Col,
-  Container,
-  Form,
-  Row,
-  Button,
-  Card,
-  FloatingLabel,
-} from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import AppURL from "../../../api/AppURL";
 import parse from "html-react-parser";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export class Refund extends Component {
+export class About extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      refund: "",
+      about: "",
       loading: "",
       display: "d-none",
     };
@@ -30,7 +22,7 @@ export class Refund extends Component {
       .then((res) => {
         if (res.status == 200) {
           this.setState({
-            refund: res.data.refund_policy,
+            about: res.data.about,
             loading: "d-none",
             display: "",
           });
@@ -50,17 +42,18 @@ export class Refund extends Component {
         console.log(err);
       });
   }
+
   render() {
     return (
       <Fragment>
-        <Container className="">
+        <Container className="p-4">
           <Row className="justify-content-center">
             <Col
               md={12}
               lg={12}
               sm={12}
               xs={12}
-              className="shadow-sm bg-white m-4 p-4"
+              className="shadow-sm bg-white m-4"
             >
               <div className={this.state.loading}>
                 <div className="ph-item">
@@ -80,8 +73,8 @@ export class Refund extends Component {
                 </div>
               </div>
               <div className={this.state.display}>
-                <h1 className="fw-light mb-3">Refund Policy</h1>
-                <p className="section-sub-title">{parse(this.state.refund)}</p>
+                <h1 className="fw-lighter py-3">About us</h1>
+                <p className="section-sub-title">{parse(this.state.about)}</p>
               </div>
             </Col>
           </Row>
@@ -92,4 +85,4 @@ export class Refund extends Component {
   }
 }
 
-export default Refund;
+export default About;

@@ -26,8 +26,11 @@ font-family: 'Open Sans', sans-serif; */
 } */
 
 a,
-p{
+p,
+ul,
+li{
     font-family: 'Nunito', sans-serif !important;
+    margin-bottom: 1rem;
 }
 
 html {
@@ -67,6 +70,7 @@ body {
 
 .Link{
     text-decoration: none !important;
+    font-family: 'Nunito', sans-serif !important;
 }
 
 .Link:hover{
