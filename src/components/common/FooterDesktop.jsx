@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, NavDropdown, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Google from "../../assets/images/google.png";
 import Apple from "../../assets/images/apple.png";
@@ -45,7 +45,9 @@ export class FooterDesktop extends Component {
                 </Link>
               </Col>
               <Col className="p-2" lg={3} md={3} sm={6} xs={12}>
-                <h5 className="text-capitalize footer-menu-title">Knowledge Base</h5>
+                <h5 className="text-capitalize footer-menu-title">
+                  Knowledge Base
+                </h5>
                 <Link to="/purchase" className="footer-link">
                   How to purchase?
                 </Link>
@@ -57,6 +59,10 @@ export class FooterDesktop extends Component {
                 <Link to="/refund" className="footer-link">
                   Ask for refund?
                 </Link>
+                <div className="footer-link">
+                  Change language?
+                  <div id="google_translate_element" className="mt-2"></div>
+                </div>
               </Col>
 
               <Col className="p-2" lg={3} md={3} sm={6} xs={12}>
