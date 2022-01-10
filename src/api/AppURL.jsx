@@ -7,6 +7,8 @@ class AppURL{
     static contact_us = this.BaseURL + "/contact-us"
 
     static siteInfo = this.BaseURL + "/site-info"
+
+    static getCategories = this.BaseURL + "/category"
     
 }
 
