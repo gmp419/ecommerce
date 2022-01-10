@@ -53,7 +53,7 @@ export class MegaMenu extends Component {
           <div className="panel">
             <ul className="my-2">
               {
-                item.subcategory_name.map((subitem, subindex) => { 
+                item.subcategory.map((subitem, subindex) => { 
                   return(
                     <li className="mb-1">
                     <a href="#" className="accordionItem" key={subindex}>
