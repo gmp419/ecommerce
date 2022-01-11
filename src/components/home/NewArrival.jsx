@@ -6,12 +6,30 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import AppURL from "../../api/AppURL";
+import axios from "axios";
 
 export class NewArrival extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      product: [],
+    };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
+  }
+
+  componentDidMount() {
+    axios
+      .get(AppURL.getCategoriesByRemark("new"))
+      .then((res) => {
+        this.setState({
+          product: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   previous(e) {
@@ -25,16 +43,53 @@ export class NewArrival extends Component {
   }
 
   render() {
+    const new_product = this.state.product;
+
+    const product = new_product.map((item, index) => {
+      if (item.offer_price == "na") {
+        return (
+          <div>
+            <Card className="image-box card ">
+              <img src={item.product_image} alt="" className="center" />
+              <Card.Body>
+                <p className="product-name-on-card">{item.title}</p>
+                <p className="product-price-on-card">
+                  Price:&nbsp;{item.price}
+                </p>
+              </Card.Body>
+            </Card>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <Card className="image-box card ">
+              <img src={item.product_image} alt="" className="center" />
+              <Card.Body>
+                <p className="product-name-on-card">{item.title}</p>
+                <p className="product-price-on-card">
+                  Price: &nbsp;
+                  <strike className="text-secondary">
+                    $&nbsp;{item.price}
+                  </strike>{" "}
+                  $&nbsp;{item.offer_price}
+                </p>{" "}
+              </Card.Body>
+            </Card>
+          </div>
+        );
+      }
+    });
     var settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       autoplay: true,
-      autoplaySpeed: 3000,
+      autoplaySpeed:3000,
       slidesToShow: 4,
-      slidesToScroll: 2,
+      slidesToScroll: 1,
       initialSlide: 0,
-      arrows: true,
+      arrows: false,
       responsive: [
         {
           breakpoint: 1024,
@@ -42,25 +97,25 @@ export class NewArrival extends Component {
             slidesToShow: 4,
             slidesToScroll: 1,
             infinite: true,
-            dots: true,
-          },
+            dots: true
+          }
         },
         {
           breakpoint: 600,
           settings: {
             slidesToShow: 2,
             slidesToScroll: 1,
-            initialSlide: 2,
-          },
+            initialSlide: 2
+          }
         },
         {
           breakpoint: 480,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: 1,
-          },
-        },
-      ],
+            slidesToScroll: 1
+          }
+        }
+      ]
     };
 
     return (
@@ -90,126 +145,7 @@ export class NewArrival extends Component {
           </div>
           <Row>
             <Slider ref={(e) => (this.slider = e)} {...settings}>
-              <div>
-                <Card className="image-box card ">
-                  <img
-                    src="https://rukminim1.flixcart.com/image/751/901/kkh6zrk0/watch/n/t/2/new-stylish-dial-black-pu-strap-watch-for-men-crab-original-imafztfca8azrfxx.jpeg?q=50"
-                    alt=""
-                    className="center"
-                  />
-                  <Card.Body>
-                    <p className="product-name-on-card">
-                      iPhone, USB-C to Lightning Cable
-                    </p>
-                    <p className="product-price-on-card">$1,000.00</p>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div>
-                <Card className="image-box card ">
-                  <img
-                    src="https://rukminim1.flixcart.com/image/751/901/kmz7qfk0/watch/i/2/9/new-stylish-dial-blue-pu-strap-watch-for-men-crab-original-imagfr7s7mh5yr3y.jpeg?q=50"
-                    alt=""
-                    className="center"
-                  />
-                  <Card.Body>
-                    <p className="product-name-on-card">
-                      iPhone, USB-C to Lightning Cable
-                    </p>
-                    <p className="product-price-on-card">$1,000.00</p>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div>
-                <Card className="image-box card ">
-                  <img
-                    src="https://rukminim1.flixcart.com/image/751/901/kkh6zrk0/watch/n/t/2/new-stylish-dial-black-pu-strap-watch-for-men-crab-original-imafztfca8azrfxx.jpeg?q=50"
-                    alt=""
-                    className="center"
-                  />
-                  <Card.Body>
-                    <p className="product-name-on-card">
-                      iPhone, USB-C to Lightning Cable
-                    </p>
-                    <p className="product-price-on-card">$1,000.00</p>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div>
-                <Card className="image-box card ">
-                  <img
-                    src="https://rukminim1.flixcart.com/image/751/901/kkh6zrk0/watch/n/t/2/new-stylish-dial-black-pu-strap-watch-for-men-crab-original-imafztfca8azrfxx.jpeg?q=50"
-                    alt=""
-                    className="center"
-                  />
-                  <Card.Body>
-                    <p className="product-name-on-card">
-                      iPhone, USB-C to Lightning Cable
-                    </p>
-                    <p className="product-price-on-card">$1,000.00</p>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div>
-                <Card className="image-box card ">
-                  <img
-                    src="https://rukminim1.flixcart.com/image/751/901/kkh6zrk0/watch/n/t/2/new-stylish-dial-black-pu-strap-watch-for-men-crab-original-imafztfca8azrfxx.jpeg?q=50"
-                    alt=""
-                    className="center"
-                  />
-                  <Card.Body>
-                    <p className="product-name-on-card">
-                      iPhone, USB-C to Lightning Cable
-                    </p>
-                    <p className="product-price-on-card">$1,000.00</p>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div>
-                <Card className="image-box card ">
-                  <img
-                    src="https://rukminim1.flixcart.com/image/751/901/kkh6zrk0/watch/n/t/2/new-stylish-dial-black-pu-strap-watch-for-men-crab-original-imafztfca8azrfxx.jpeg?q=50"
-                    alt=""
-                    className="center"
-                  />
-                  <Card.Body>
-                    <p className="product-name-on-card">
-                      iPhone, USB-C to Lightning Cable
-                    </p>
-                    <p className="product-price-on-card">$1,000.00</p>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div>
-                <Card className="image-box card ">
-                  <img
-                    src="https://rukminim1.flixcart.com/image/751/901/kkh6zrk0/watch/n/t/2/new-stylish-dial-black-pu-strap-watch-for-men-crab-original-imafztfca8azrfxx.jpeg?q=50"
-                    alt=""
-                    className="center"
-                  />
-                  <Card.Body>
-                    <p className="product-name-on-card">
-                      iPhone, USB-C to Lightning Cable
-                    </p>
-                    <p className="product-price-on-card">$1,000.00</p>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div>
-                <Card className="image-box card ">
-                  <img
-                    src="https://rukminim1.flixcart.com/image/751/901/kkh6zrk0/watch/n/t/2/new-stylish-dial-black-pu-strap-watch-for-men-crab-original-imafztfca8azrfxx.jpeg?q=50"
-                    alt=""
-                    className="center"
-                  />
-                  <Card.Body>
-                    <p className="product-name-on-card">
-                      iPhone, USB-C to Lightning Cable
-                    </p>
-                    <p className="product-price-on-card">$1,000.00</p>
-                  </Card.Body>
-                </Card>
-              </div>
+              {product}
             </Slider>
           </Row>
         </Container>

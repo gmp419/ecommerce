@@ -7,6 +7,7 @@ import MegaMenuAll from "../home/MegaMenuAll";
 export class NavMenuDesktop extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       isOpen: "sideNavClose",
       isOverlay: "ContentOverlayClose",

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import AppURL from "../../api/AppURL";
 
 export class MegaMenuMobile extends Component {
@@ -68,17 +69,25 @@ export class MegaMenuMobile extends Component {
           </button>
           <div className="panel">
             <ul className="my-2">
-              {
-                item.subcategory.map((subitem, subindex) => { 
-                  return(
-                    <li className="mb-1">
-                    <a href="#" className="accordionItemMobile" key={subindex}>
+              {item.subcategory.map((subitem, subindex) => {
+                return (
+                  <li className="mb-1">
+                    <Link
+                      to={
+                        "/allsubcategory/" +
+                        item.category_name +
+                        "/" +
+                        subitem.subcategory_name
+                      }
+                      onClick={() => window.location.href = "/allsubcategory/"+item.category_name+"/"+subitem.subcategory_name}
+                      className="accordionItemMobile"
+                      key={subindex}
+                    >
                       {subitem.subcategory_name}
-                    </a>
-                  </li> 
-                  )
-                })
-              }
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
@@ -86,11 +95,7 @@ export class MegaMenuMobile extends Component {
     });
     return (
       <div className="accordionMenuDivMobile">
-        <div className="accordionMenuDivInsideMobile">
-          
-          {menu}
-          </div>
-         
+        <div className="accordionMenuDivInsideMobile">{menu}</div>
       </div>
     );
   }

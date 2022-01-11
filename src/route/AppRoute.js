@@ -7,7 +7,9 @@ import FavouritePage from '../pages/FavouritePage'
 import HomePage from '../pages/HomePage'
 import NotificationPage from '../pages/NotificationPage'
 import PrivacyPage from '../pages/PrivacyPage'
+import ProductCategoryPage from '../pages/ProductCategoryPage'
 import ProductDetailsPage from '../pages/ProductDetailsPage'
+import ProductSubcategoryPage from '../pages/ProductSubcategoryPage'
 import PurchasePage from '../pages/PurchasePage'
 import RefundPage from '../pages/RefundPage'
 import UserLoginPage from '../pages/UserLoginPage'
@@ -17,7 +19,6 @@ export class AppRoute extends Component {
         return (
             <Fragment>
                 <Switch>
-                    <Route exact path="/" component={HomePage} />
                     <Route exact path="/login" component={UserLoginPage} />
                     <Route exact path="/contact" component={ContactPage} />
                     <Route exact path="/purchase" component={PurchasePage} />
@@ -28,6 +29,10 @@ export class AppRoute extends Component {
                     <Route exact path="/favourite" component={FavouritePage} />
                     <Route exact path="/cart" component={CartPage} />
                     <Route exact path="/about-us" component={AboutPage} />
+                    <Route exact path="/allcategory/:category" component={ProductCategoryPage} />
+                    <Route exact path="/allsubcategory/:category/:subcategory" component={ProductSubcategoryPage} />
+                    <Route exact path="/" component={HomePage} />
+
                 </Switch>
             </Fragment>
         )

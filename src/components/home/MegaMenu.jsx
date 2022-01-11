@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export class MegaMenu extends Component {
   constructor(props) {
@@ -41,8 +42,8 @@ export class MegaMenu extends Component {
 
     const menu = catList.map((item, index) => {
       return (
-        <div key={index}>
-          <button onClick={this.menuClick} className="accordion">
+        <div >
+          <button onClick={this.menuClick} className="accordion" key={index}>
             <img
               src={item.category_image}
               className="accordionMenuIcon"
@@ -56,9 +57,9 @@ export class MegaMenu extends Component {
                 item.subcategory.map((subitem, subindex) => { 
                   return(
                     <li className="mb-1">
-                    <a href="#" className="accordionItem" key={subindex}>
+                    <Link to={"/allsubcategory/"+item.category_name+"/"+subitem.subcategory_name} className="accordionItem" key={subindex}>
                       {subitem.subcategory_name}
-                    </a>
+                    </Link>
                   </li> 
                   )
                 })

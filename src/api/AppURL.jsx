@@ -1,15 +1,27 @@
-class AppURL{
+class AppURL {
+  static BaseURL = "http://localhost:8000/api";
 
-    static BaseURL = "http://localhost:8000/api"
+  static getVisitors = this.BaseURL + "/getvisitor";
 
-    static getVisitors = this.BaseURL + "/getvisitor"
+  static contact_us = this.BaseURL + "/contact-us";
 
-    static contact_us = this.BaseURL + "/contact-us"
+  static siteInfo = this.BaseURL + "/site-info";
 
-    static siteInfo = this.BaseURL + "/site-info"
+  static getCategories = this.BaseURL + "/category";
 
-    static getCategories = this.BaseURL + "/category"
-    
+  static getCategoriesByRemark(remark) {
+    return this.BaseURL + "/product-by-remark/" + remark;
+  }
+
+  static getCategoriesByCategory(category) {
+    return this.BaseURL + "/product-by-category/" + category;
+  }
+
+  static getCategoriesBySubcategory(category, subcategory) {
+    return (
+      this.BaseURL + "/product-by-subcategory/" + category + "/" + subcategory
+    );
+  }
 }
 
-export default AppURL
+export default AppURL;

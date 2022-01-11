@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component, Fragment } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import AppURL from "../../api/AppURL";
 
 class Categories extends Component {
@@ -25,6 +26,7 @@ class Categories extends Component {
     const menu = catList.map((item, index) => {
       return (
         <Col className="p-0" key={1} xl={2} lg={2} md={3} sm={6} xs={6} key={index}>
+          <Link to={"/allcategory/"+item.category_name}>
           <Card className="h-100 w-100 text-center">
             <Card.Body>
               <img
@@ -33,7 +35,7 @@ class Categories extends Component {
               />
               <h5 className="category-name">{item.category_name}</h5>
             </Card.Body>
-          </Card>
+          </Card></Link>
         </Col>
       );
     });
