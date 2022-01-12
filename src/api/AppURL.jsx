@@ -22,6 +22,11 @@ class AppURL {
       this.BaseURL + "/product-by-subcategory/" + category + "/" + subcategory
     );
   }
+
+  static getSliderImages = this.BaseURL + "/slider-images";
+
+
+
 }
 
 export default AppURL;

@@ -3,9 +3,6 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider1 from "../../assets/images/slider/slider1.jpg";
-import Slider2 from "../../assets/images/slider/slider2.jpg";
-import Slider3 from "../../assets/images/slider/slider3.jpg";
 
 export class HomeSlider extends Component {
   render() {
@@ -46,18 +43,22 @@ export class HomeSlider extends Component {
         },
       ],
     };
+
+    const images = this.props.sliderImages;
+
+    const view = images.map((image , index) => {
+      return (
+        <div key={index}>
+          <img src={image.slider_image} alt="slider image" className="slider-img" />
+        </div>
+      );
+    })
+
     return (
+      
       <div>
         <Slider {...settings}>
-          <div>
-            <img src={Slider1} alt="slider1" className="slider-img"/>
-          </div>
-          <div>
-            <img src={Slider2} alt="slider2" className="slider-img"/>
-          </div>
-          <div>
-            <img src={Slider3} alt="slider3" className="slider-img"/>
-          </div>
+          {view}
         </Slider>
       </div>
     );

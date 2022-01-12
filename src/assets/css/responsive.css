@@ -3,11 +3,19 @@
   .desktop {
     display: none;
   }
+  .slider-img {
+    width: 100% !important;
+    height: 225px !important;
+  }
 }
 
 @media (min-width: 375.98px) and (max-width: 575.98px) {
   .desktop {
     display: none;
+  }
+  .slider-img {
+    width: 100% !important;
+    height: 275px !important;
   }
 }
 
@@ -15,6 +23,11 @@
 
   .desktop {
     display: none;
+  }
+
+  .slider-img {
+    width: 100% !important;
+    height: 300px !important;
   }
 }
 
