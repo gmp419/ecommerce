@@ -3,12 +3,15 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import AppURL from "../../api/AppURL";
+import FeaturedLoading from "../placeholder/FeaturedLoading";
 
 export class FeaturedProducts extends Component {
   constructor() {
     super();
     this.state = {
       product: [],
+      loading: "",
+      display: "d-none",
     };
   }
 
@@ -18,6 +21,8 @@ export class FeaturedProducts extends Component {
       .then((res) => {
         this.setState({
           product: res.data,
+          loading: "d-none",
+          display: "",
         });
       })
       .catch((err) => {
@@ -93,15 +98,18 @@ export class FeaturedProducts extends Component {
 
     return (
       <Fragment>
-        <Container className="text-center" fluid={true}>
-          <div className="section-title text-center mb-55 text-uppercase">
-            <h2>FEATURED PRODUCT</h2>
-            <p className="text-capitalize">
-              Some of Our Exclusive Collection, You May Like
-            </p>
-          </div>
-          <Row>{product}</Row>
-        </Container>
+        <FeaturedLoading isLoading={this.state.loading} />
+        <div className={this.state.display}>
+          <Container className="text-center" fluid={true}>
+            <div className="section-title text-center mb-55 text-uppercase">
+              <h2>FEATURED PRODUCT</h2>
+              <p className="text-capitalize">
+                Some of Our Exclusive Collection, You May Like
+              </p>
+            </div>
+            <Row>{product}</Row>
+          </Container>
+        </div>
       </Fragment>
     );
   }

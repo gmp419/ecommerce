@@ -2,12 +2,15 @@ import axios from "axios";
 import React, { Component, Fragment } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import AppURL from "../../api/AppURL";
+import CollectionLoading from "../placeholder/CollectionLoading";
 
 export class Collection extends Component {
   constructor() {
     super();
     this.state = {
       product: [],
+      loading: "",
+      display: "d-none",
     };
   }
 
@@ -17,6 +20,8 @@ export class Collection extends Component {
       .then((res) => {
         this.setState({
           product: res.data,
+          loading: "d-none",
+          display: "",
         });
       })
       .catch((err) => {
@@ -61,6 +66,8 @@ export class Collection extends Component {
     });
     return (
       <Fragment>
+        <CollectionLoading isLoading={this.state.loading} />
+        <div className={this.state.display}>
         <Container className="text-center" fluid={true}>
           <div className="section-title text-center mb-55 text-uppercase">
             <h2 className="text-uppercase">Product Collection</h2>
@@ -72,6 +79,7 @@ export class Collection extends Component {
             {product}
           </Row>
         </Container>
+        </div>
       </Fragment>
     );
   }

@@ -8,12 +8,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AppURL from "../../api/AppURL";
 import axios from "axios";
+import CollectionLoading from "../placeholder/CollectionLoading";
+import NewArrivalLoading from "../placeholder/NewArrivalLoading";
 
 export class NewArrival extends Component {
   constructor(props) {
     super(props);
     this.state = {
       product: [],
+      loading: "",
+      display: "d-none",
     };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
@@ -25,6 +29,8 @@ export class NewArrival extends Component {
       .then((res) => {
         this.setState({
           product: res.data,
+          loading: "d-none",
+          display: "",
         });
       })
       .catch((err) => {
@@ -85,7 +91,7 @@ export class NewArrival extends Component {
       infinite: true,
       speed: 500,
       autoplay: true,
-      autoplaySpeed:3000,
+      autoplaySpeed: 3000,
       slidesToShow: 4,
       slidesToScroll: 1,
       initialSlide: 0,
@@ -97,58 +103,61 @@ export class NewArrival extends Component {
             slidesToShow: 4,
             slidesToScroll: 1,
             infinite: true,
-            dots: true
-          }
+            dots: true,
+          },
         },
         {
           breakpoint: 600,
           settings: {
             slidesToShow: 2,
             slidesToScroll: 1,
-            initialSlide: 2
-          }
+            initialSlide: 2,
+          },
         },
         {
           breakpoint: 480,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
+            slidesToScroll: 1,
+          },
+        },
+      ],
     };
 
     return (
       <Fragment>
-        <Container className="text-center" fluid={true}>
-          <div className="section-title text-center mb-55 text-uppercase">
-            <h2>
-              <a
-                href=""
-                className="btn btn-sm ml-2 site-btn"
-                onClick={this.previous}
-              >
-                <i className="fa fa-angle-left"></i>
-              </a>
-              &nbsp; New Arrivals &nbsp;
-              <a
-                href=""
-                className="btn btn-sm ml-2 site-btn"
-                onClick={this.next}
-              >
-                <i className="fa fa-angle-right"></i>
-              </a>
-            </h2>
-            <p className="text-capitalize">
-              Some of Our Exclusive Collection, You May Like
-            </p>
-          </div>
-          <Row>
-            <Slider ref={(e) => (this.slider = e)} {...settings}>
-              {product}
-            </Slider>
-          </Row>
-        </Container>
+        <NewArrivalLoading isLoading={this.state.loading} />
+        <div className={this.state.display}>
+          <Container className="text-center" fluid={true}>
+            <div className="section-title text-center mb-55 text-uppercase">
+              <h2>
+                <a
+                  href=""
+                  className="btn btn-sm ml-2 site-btn"
+                  onClick={this.previous}
+                >
+                  <i className="fa fa-angle-left"></i>
+                </a>
+                &nbsp; New Arrivals &nbsp;
+                <a
+                  href=""
+                  className="btn btn-sm ml-2 site-btn"
+                  onClick={this.next}
+                >
+                  <i className="fa fa-angle-right"></i>
+                </a>
+              </h2>
+              <p className="text-capitalize">
+                Some of Our Exclusive Collection, You May Like
+              </p>
+            </div>
+            <Row>
+              <Slider ref={(e) => (this.slider = e)} {...settings}>
+                {product}
+              </Slider>
+            </Row>
+          </Container>
+        </div>
       </Fragment>
     );
   }

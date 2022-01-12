@@ -4,6 +4,7 @@ import MegaMenu from "./MegaMenu";
 import HomeSlider from "./HomeSlider";
 import axios from "axios";
 import AppURL from "../../api/AppURL";
+import SliderLoading from "../placeholder/SliderLoading";
 
 export class HomeTop extends Component {
   constructor() {
@@ -11,6 +12,8 @@ export class HomeTop extends Component {
     this.state = {
       menuData: [],
       slider: [],
+      loading: "",
+      display: "d-none",
     };
   }
 
@@ -18,7 +21,11 @@ export class HomeTop extends Component {
     axios
       .get(AppURL.getCategories)
       .then((response) => {
-        this.setState({ menuData: response.data });
+        this.setState({
+          menuData: response.data,
+          loading: "d-none",
+          display: "",
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -27,7 +34,11 @@ export class HomeTop extends Component {
     axios
       .get(AppURL.getSliderImages)
       .then((response) => {
-        this.setState({ slider: response.data });
+        this.setState({
+          slider: response.data,
+          loading: "d-none",
+          display: "",
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -37,16 +48,19 @@ export class HomeTop extends Component {
   render() {
     return (
       <Fragment>
-        <Container fluid={true} className="p-0 m-0 overflow-hidden">
-          <Row>
-            <Col lg={3} md={3} sm={12}>
-              <MegaMenu data={this.state.menuData} />
-            </Col>
-            <Col lg={9} md={9} sm={12} className="p-0">
-              <HomeSlider sliderImages={this.state.slider} />
-            </Col>
-          </Row>
-        </Container>
+        <SliderLoading isLoading={this.state.loading} />
+        <div className={this.state.display}>
+          <Container fluid={true} className="p-0 m-0 overflow-hidden">
+            <Row>
+              <Col lg={3} md={3} sm={12}>
+                <MegaMenu data={this.state.menuData} />
+              </Col>
+              <Col lg={9} md={9} sm={12} className="p-0">
+                <HomeSlider sliderImages={this.state.slider} />
+              </Col>
+            </Row>
+          </Container>
+        </div>
       </Fragment>
     );
   }
