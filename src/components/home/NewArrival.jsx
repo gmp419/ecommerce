@@ -10,6 +10,7 @@ import AppURL from "../../api/AppURL";
 import axios from "axios";
 import CollectionLoading from "../placeholder/CollectionLoading";
 import NewArrivalLoading from "../placeholder/NewArrivalLoading";
+import { Link } from "react-router-dom";
 
 export class NewArrival extends Component {
   constructor(props) {
@@ -55,33 +56,43 @@ export class NewArrival extends Component {
       if (item.offer_price == "na") {
         return (
           <div>
-            <Card className="image-box card ">
-              <img src={item.product_image} alt="" className="center" />
-              <Card.Body>
-                <p className="product-name-on-card">{item.title}</p>
-                <p className="product-price-on-card">
-                  Price:&nbsp;{item.price}
-                </p>
-              </Card.Body>
-            </Card>
+            <Link
+              to={"/productdetails/" + item.id}
+              className="text-decoration-none"
+            >
+              <Card className="image-box card ">
+                <img src={item.product_image} alt="" className="center" />
+                <Card.Body>
+                  <p className="product-name-on-card">{item.title}</p>
+                  <p className="product-price-on-card">
+                    Price:&nbsp;{item.price}
+                  </p>
+                </Card.Body>
+              </Card>
+            </Link>
           </div>
         );
       } else {
         return (
           <div>
-            <Card className="image-box card ">
-              <img src={item.product_image} alt="" className="center" />
-              <Card.Body>
-                <p className="product-name-on-card">{item.title}</p>
-                <p className="product-price-on-card">
-                  Price: &nbsp;
-                  <strike className="text-secondary">
-                    $&nbsp;{item.price}
-                  </strike>{" "}
-                  $&nbsp;{item.offer_price}
-                </p>{" "}
-              </Card.Body>
-            </Card>
+            <Link
+              to={"/productdetails/" + item.id}
+              className="text-decoration-none"
+            >
+              <Card className="image-box card ">
+                <img src={item.product_image} alt="" className="center" />
+                <Card.Body>
+                  <p className="product-name-on-card">{item.title}</p>
+                  <p className="product-price-on-card">
+                    Price: &nbsp;
+                    <strike className="text-secondary">
+                      $&nbsp;{item.price}
+                    </strike>{" "}
+                    $&nbsp;{item.offer_price}
+                  </p>{" "}
+                </Card.Body>
+              </Card>
+            </Link>
           </div>
         );
       }

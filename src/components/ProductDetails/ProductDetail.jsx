@@ -1,12 +1,105 @@
 import React, { Component, Fragment } from "react";
-import { Container,Row,Col} from 'react-bootstrap'
-import Product1 from '../../assets/images/product/product1.png'
-import Product2 from '../../assets/images/product/product2.png'
-import Product3 from '../../assets/images/product/product3.png'
-import Product4 from '../../assets/images/product/product4.png'
+import { Container, Row, Col, Badge, Form } from "react-bootstrap";
+import Product1 from "../../assets/images/product/product1.png";
 
 export class ProductDetail extends Component {
+  constructor() {
+    super();
+    this.state = {
+      product: [],
+    };
+  }
+
+  imageClick(e) {
+    let source = e.target.src;
+    let image = document.getElementById("previewImage");
+    image.src = source;
+  }
+
+  priceOption(price, offer_price) {
+    var cal = Math.round(((price - offer_price) / price) * 100);
+    if (offer_price == "na") {
+      return (
+        <div
+          className="Product-price-card d-inline"
+          style={{ backgroundColor: "#051b35", color: "white" }}
+        >
+          $&nbsp;{price}
+        </div>
+      );
+    } else {
+      return (
+        <>
+          <div
+            className="Product-price-card d-inline"
+            style={{ backgroundColor: "#051b35", color: "white" }}
+          >
+            $&nbsp;{offer_price}
+          </div>
+          <div className="Product-price-card d-inline text-secondary ">
+            <strike>$&nbsp; {price}</strike>
+          </div>
+          
+          <div className="Product-price-card d-inline bg-success text-white">{cal}% off</div>
+
+        </>
+      );
+    }
+  }
+
   render() {
+    let {
+      product_image,
+      image1,
+      image2,
+      image3,
+      image4,
+      title,
+      short_description,
+      long_description,
+      price,
+      offer_price,
+      brand,
+      category,
+      subcategory,
+      product_code,
+      color,
+      size,
+    } = this.newMethod();
+
+    var colorDiv = "d-none";
+    if (color) {
+      let colorArray = color.split(",");
+      var colorOption = colorArray.map((item, index) => {
+        return (
+          <>
+            <option key={index} value={item}>
+              {item}
+            </option>
+          </>
+        );
+      });
+      colorDiv = "";
+    } else {
+      colorDiv = "d-none";
+    }
+    var sizeDiv = "d-none";
+    if (size) {
+      let sizeArray = size.split(",");
+      var sizeOption = sizeArray.map((item, index) => {
+        return (
+          <>
+            <option key={index} value={item}>
+              {item}
+            </option>
+          </>
+        );
+      });
+      sizeDiv = "";
+    } else {
+      sizeDiv = "d-none";
+    }
+
     return (
       <Fragment>
         <Container className="BetweenTwoSection">
@@ -20,146 +113,94 @@ export class ProductDetail extends Component {
             >
               <Row>
                 <Col className="p-3" md={6} lg={6} sm={12} xs={12}>
-                  <img className="w-100" src={Product1} />
+                  <img
+                    id="previewImage"
+                    className="w-100"
+                    src={product_image}
+                  />
                   <Container className="my-3">
                     <Row>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img className="w-100" src={Product1} />
+                        <img
+                          onClick={this.imageClick}
+                          className="w-100 cursor-pointer"
+                          src={image1}
+                        />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img className="w-100" src={Product2} />
+                        <img
+                          onClick={this.imageClick}
+                          className="w-100 cursor-pointer"
+                          src={image2}
+                        />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img className="w-100" src={Product3} />
+                        <img
+                          onClick={this.imageClick}
+                          className="w-100 cursor-pointer"
+                          src={image3}
+                        />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img className="w-100" src={Product4} />
+                        <img
+                          onClick={this.imageClick}
+                          className="w-100 cursor-pointer"
+                          src={image4}
+                        />
                       </Col>
                     </Row>
                   </Container>
                 </Col>
                 <Col className="p-3 " md={6} lg={6} sm={12} xs={12}>
-                  <h5 className="Product-Name">
-                    ASUS TUF A15 FA506IU Ryzen 7 4800H GTX
-                  </h5>
-                  <h6 className="section-sub-title">
-                    Some Of Our Exclusive Collection, You May Like Some Of Our
-                    Exclusive Collectio
-                  </h6>
+                  <h5 className="Product-Name">{title} </h5>
+                  <h6 className="section-sub-title">{short_description}</h6>
                   <div className="input-group">
-                    <div className="Product-price-card d-inline ">
-                      Reguler Price 200
-                    </div>
-                    <div className="Product-price-card d-inline ">
-                      50% Discount
-                    </div>
-                    <div className="Product-price-card d-inline ">
-                      New Price 100
-                    </div>
-                  </div>
-                  <h6 className="mt-2">Choose Color</h6>
-                  <div className="input-group">
-                    <div className="form-check mx-1">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        id="exampleRadios1"
-                        value="option1"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="exampleRadios1"
-                      >
-                        Black
-                      </label>
-                    </div>
-                    <div className="form-check mx-1">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        id="exampleRadios1"
-                        value="option1"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="exampleRadios1"
-                      >
-                        Green
-                      </label>
-                    </div>
-                    <div className="form-check mx-1">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        id="exampleRadios1"
-                        value="option1"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="exampleRadios1"
-                      >
-                        Red
-                      </label>
-                    </div>
+                    {this.priceOption(price, offer_price)}
                   </div>
 
-                  <h6 className="mt-2">Choose Size</h6>
-                  <div className="input-group">
-                    <div className="form-check mx-1">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        id="exampleRadios1"
-                        value="option1"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="exampleRadios1"
-                      >
-                        X
-                      </label>
-                    </div>
-                    <div className="form-check mx-1">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        id="exampleRadios1"
-                        value="option1"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="exampleRadios1"
-                      >
-                        XX
-                      </label>
-                    </div>
-                    <div className="form-check mx-1">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        id="exampleRadios1"
-                        value="option1"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="exampleRadios1"
-                      >
-                        XXXX
-                      </label>
-                    </div>
-                  </div>
+                  <Form.Group
+                    controlId=""
+                    className={"form-inline w-50 col-auto mt-1 " + colorDiv}
+                  >
+                    <h6 className="mt-2">Choose Color</h6>
+                    <Form.Select defaultValue="Choose...">
+                      <option>Choose...</option>
+                      {colorOption}
+                    </Form.Select>
+                  </Form.Group>
+
+                  <Form.Group
+                    controlId=""
+                    className={"form-inline w-50 col-auto mt-1" + sizeDiv}
+                  >
+                    <h6 className="mt-2">Choose Size</h6>
+                    <Form.Select defaultValue="Choose...">
+                      <option>Choose...</option>
+                      {sizeOption}
+                    </Form.Select>
+                  </Form.Group>
 
                   <h6 className="mt-2">Quantity</h6>
                   <input
                     className="form-control text-center w-50"
                     type="number"
+                    placeholder="1"
+                    name="quantity"
                   />
+
+                  <div className="mt-2 text-capitalize">
+                    <b>Category:</b>&nbsp; {category}
+                  </div>
+                  <div className="mt-2 text-capitalize">
+                    <b>Subcategory:</b>&nbsp; {subcategory}
+                  </div>
+                  <div className="mt-2 text-capitalize">
+                    <b>Brand:</b>&nbsp;
+                    <Badge bg="dark">{brand}</Badge>{" "}
+                  </div>
+                  <div className="mt-2 text-capitalize">
+                    <b>Product code:</b>&nbsp; {product_code}
+                  </div>
 
                   <div className="input-group mt-3">
                     <button className="btn site-btn m-1 ">
@@ -181,24 +222,7 @@ export class ProductDetail extends Component {
               <Row>
                 <Col className="" md={6} lg={6} sm={12} xs={12}>
                   <h6 className="mt-2">DETAILS</h6>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                    magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                    quis nostrud exerci tation Lorem ipsum dolor sit amet,
-                    consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                    tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                    wisi enim ad minim veniam, quis nostrud exerci tation
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                    magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                    quis nostrud exerci tation Lorem ipsum dolor sit amet,
-                    consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                    tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                    wisi enim ad minim veniam, quis nostrud exerci tation
-                  </p>
+                  <p>{long_description}</p>
                 </Col>
 
                 <Col className="" md={6} lg={6} sm={12} xs={12}>
@@ -254,6 +278,83 @@ export class ProductDetail extends Component {
         </Container>
       </Fragment>
     );
+  }
+
+  newMethod() {
+    let productAllData = this.props.data;
+    let title = productAllData["productList"]
+      ? productAllData["productList"][0]["title"]
+      : "";
+    let price = productAllData["productList"]
+      ? productAllData["productList"][0]["price"]
+      : "";
+    let offer_price = productAllData["productList"]
+      ? productAllData["productList"][0]["offer_price"]
+      : "";
+    let product_image = productAllData["productList"]
+      ? productAllData["productList"][0]["product_image"]
+      : "";
+    let category = productAllData["productList"]
+      ? productAllData["productList"][0]["category"]
+      : "";
+    let subcategory = productAllData["productList"]
+      ? productAllData["productList"][0]["subcategory"]
+      : "";
+    let remark = productAllData["productList"]
+      ? productAllData["productList"][0]["remark"]
+      : "";
+    let brand = productAllData["productList"]
+      ? productAllData["productList"][0]["brand"]
+      : "";
+    let star_rating = productAllData["productList"]
+      ? productAllData["productList"][0]["star_rating"]
+      : "";
+    let product_code = productAllData["productList"]
+      ? productAllData["productList"][0]["product_code"]
+      : "";
+
+    let short_description = productAllData["productDetails"]
+      ? productAllData["productDetails"][0]["short_description"]
+      : "";
+    let long_description = productAllData["productDetails"]
+      ? productAllData["productDetails"][0]["long_description"]
+      : "";
+    let image1 = productAllData["productDetails"]
+      ? productAllData["productDetails"][0]["image1"]
+      : "";
+    let image2 = productAllData["productDetails"]
+      ? productAllData["productDetails"][0]["image2"]
+      : "";
+    let image3 = productAllData["productDetails"]
+      ? productAllData["productDetails"][0]["image3"]
+      : "";
+    let image4 = productAllData["productDetails"]
+      ? productAllData["productDetails"][0]["image4"]
+      : "";
+    let color = productAllData["productDetails"]
+      ? productAllData["productDetails"][0]["color"]
+      : "";
+    let size = productAllData["productDetails"]
+      ? productAllData["productDetails"][0]["size"]
+      : "";
+    return {
+      product_image,
+      image1,
+      image2,
+      image3,
+      image4,
+      title,
+      short_description,
+      long_description,
+      price,
+      offer_price,
+      brand,
+      category,
+      subcategory,
+      product_code,
+      color,
+      size,
+    };
   }
 }
 

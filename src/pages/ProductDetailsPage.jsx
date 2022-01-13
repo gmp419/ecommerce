@@ -1,4 +1,7 @@
+import axios from "axios";
 import React, { Component, Fragment } from "react";
+import { Spinner } from "react-bootstrap";
+import AppURL from "../api/AppURL";
 import Contact from "../components/common/Contact";
 import FooterDesktop from "../components/common/FooterDesktop";
 import FooterMobile from "../components/common/FooterMobile";
@@ -6,9 +9,33 @@ import NavMenuDesktop from "../components/common/NavMenuDesktop";
 import NavMenuMobile from "../components/common/NavMenuMobile";
 import ProductDetail from "../components/ProductDetails/ProductDetail";
 import SuggestedProduct from "../components/ProductDetails/SuggestedProduct";
+
 export class ProductDetailsPage extends Component {
+  constructor({ match }) {
+    super();
+    this.state = {
+      code: match.params.code,
+      product: [],
+      loading: "",
+      display: "d-none",
+    };
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
+    axios
+      .get(AppURL.getProductDetails(this.state.code))
+      .then((res) => {
+        this.setState({
+          product: res.data,
+          loading: "d-none",
+          display: "",
+        });
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   render() {
     return (
@@ -19,8 +46,26 @@ export class ProductDetailsPage extends Component {
         <div className="mobile">
           <NavMenuMobile />
         </div>
-        <ProductDetail />
-        <SuggestedProduct/>
+        <div className={this.state.loading}>
+          <Spinner animation="border" role="status"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              height: "100px",
+              width: "100px",
+              marginTop: "-50px",
+              marginLeft: "-50px",
+              backgroundSize: '100%',
+            }}
+          >
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+        <div className={this.state.display}>
+          <ProductDetail data={this.state.product} />
+          <SuggestedProduct />
+        </div>
         <div className="desktop">
           <FooterDesktop />
         </div>

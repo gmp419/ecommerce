@@ -25,7 +25,9 @@ class AppURL {
 
   static getSliderImages = this.BaseURL + "/slider-images";
 
-
+  static getProductDetails(code) {
+    return this.BaseURL+"/product-details/"+code;
+  }
 
 }
 

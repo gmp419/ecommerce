@@ -46,7 +46,7 @@ export class FeaturedProducts extends Component {
             className="p-1"
             key={index}
           >
-            <Link to="productdetails" className="text-decoration-none">
+            <Link to={"/productdetails/"+item.id}  className="text-decoration-none">
               <Card className="image-box card ">
                 <img
                   src={item.product_image}
@@ -73,7 +73,7 @@ export class FeaturedProducts extends Component {
             className="p-1"
             key={index}
           >
-            <Link to="productdetails" className="text-decoration-none">
+            <Link to={"/productdetails/"+item.id} className="text-decoration-none">
               <Card className="image-box card ">
                 <img
                   src={item.product_image}
