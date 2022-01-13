@@ -29,6 +29,9 @@ class AppURL {
     return this.BaseURL+"/product-details/"+code;
   }
 
+  static notification = this.BaseURL + "/notification";
+
+
 }
 
 export default AppURL;
