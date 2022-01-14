@@ -12,6 +12,7 @@ import ProductDetailsPage from '../pages/ProductDetailsPage'
 import ProductSubcategoryPage from '../pages/ProductSubcategoryPage'
 import PurchasePage from '../pages/PurchasePage'
 import RefundPage from '../pages/RefundPage'
+import SearchPage from '../pages/SearchPage'
 import UserLoginPage from '../pages/UserLoginPage'
 
 export class AppRoute extends Component {
@@ -32,7 +33,8 @@ export class AppRoute extends Component {
                     <Route exact path="/allcategory/:category" component={ProductCategoryPage} />
                     <Route exact path="/allsubcategory/:category/:subcategory" component={ProductSubcategoryPage} />
                     <Route exact path="/" component={HomePage} />
-                    <Route exact path="/" component={HomePage} />
+
+                    <Route exact path='/search/:search' component={SearchPage} />
                     {/* <Route exact path="/" render={(props) => <HomePage {...props} key={Date.now()} /> } />
 
                     <Route exact path="/login" render={(props) =>

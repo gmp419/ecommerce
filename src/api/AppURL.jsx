@@ -31,6 +31,10 @@ class AppURL {
 
   static notification = this.BaseURL + "/notification";
 
+  static searchItem(key) {
+    return this.BaseURL + "/search/" + key;
+  }
+
 
 }
 
