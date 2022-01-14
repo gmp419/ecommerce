@@ -12,8 +12,12 @@ import ProductDetailsPage from '../pages/ProductDetailsPage'
 import ProductSubcategoryPage from '../pages/ProductSubcategoryPage'
 import PurchasePage from '../pages/PurchasePage'
 import RefundPage from '../pages/RefundPage'
+import RegisterPage from '../pages/RegisterPage'
 import SearchPage from '../pages/SearchPage'
 import UserLoginPage from '../pages/UserLoginPage'
+import  ForgetPasswordPage  from '../pages/ForgetPasswordPage'
+import  ResetPasswordPage  from '../pages/ResetPasswordPage'
+import  ProfilePage  from '../pages/ProfilePage'
 
 export class AppRoute extends Component {
     render() {
@@ -21,6 +25,9 @@ export class AppRoute extends Component {
             <Fragment>
                 <Switch>
                     <Route exact path="/login" component={UserLoginPage} />
+                    <Route exact path="/register" component={RegisterPage} />
+                    <Route exact path="/forget-password" component={ForgetPasswordPage} />
+                    <Route exact path="/reset-password/:id" component={ResetPasswordPage} />
                     <Route exact path="/contact" component={ContactPage} />
                     <Route exact path="/purchase" component={PurchasePage} />
                     <Route exact path="/privacy" component={PrivacyPage} />
@@ -33,8 +40,13 @@ export class AppRoute extends Component {
                     <Route exact path="/allcategory/:category" component={ProductCategoryPage} />
                     <Route exact path="/allsubcategory/:category/:subcategory" component={ProductSubcategoryPage} />
                     <Route exact path="/" component={HomePage} />
+                    <Route exact path="/profile" component={ProfilePage} />
 
                     <Route exact path='/search/:search' component={SearchPage} />
+
+
+
+
                     {/* <Route exact path="/" render={(props) => <HomePage {...props} key={Date.now()} /> } />
 
                     <Route exact path="/login" render={(props) =>

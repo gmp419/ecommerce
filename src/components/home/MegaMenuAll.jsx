@@ -50,7 +50,13 @@ export class MegaMenuAll extends Component {
                 return (
                   <li className="mb-1">
                     <Link
-                      onClick={()=> window.location.href = "/allsubcategory/"+item.category_name+"/"+subitem.subcategory_name}
+                      onClick={() =>
+                        (window.location.href =
+                          "/allsubcategory/" +
+                          item.category_name +
+                          "/" +
+                          subitem.subcategory_name)
+                      }
                       to={
                         "/allsubcategory/" +
                         item.category_name +

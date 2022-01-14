@@ -126,11 +126,13 @@ export class NavMenuDesktop extends Component {
                       <span className="badge text-white bg-danger">2</span>
                     </sup>
                   </Link>
-                  <a className="btn mb-0 ">
-                    <i className="fa h4 fa-mobile-alt"></i>
-                  </a>
+                  
                   <Link to="/login" className="h4 btn mb-0">
                     LOGIN
+                  </Link>
+                  <span>|</span>
+                  <Link to="/register" className="h4 btn mb-0">
+                    REGISTER
                   </Link>
 
                   <Link

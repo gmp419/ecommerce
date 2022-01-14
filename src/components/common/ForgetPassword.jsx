@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { Col, Container, Form, Row, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import login from "../../assets/images/login.png";
+import forget from "../../assets/images/forget.jpg";
 
-export class UserLogin extends Component {
-
+export class ForgetPassword extends Component {
   render() {
     return (
       <Fragment>
@@ -27,8 +26,9 @@ export class UserLogin extends Component {
                 >
                   <Form className="onboardForm">
                     <div className="section-title text-center mb-55 text-uppercase">
-                      <h2>Login Here</h2>
+                      <h2>Forget your password?</h2>
                     </div>
+
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                       <Form.Label>Email address</Form.Label>
                       <Form.Control type="email" placeholder="Enter email" />
@@ -37,31 +37,24 @@ export class UserLogin extends Component {
                       </Form.Text>
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                      <Form.Label>Password</Form.Label>
-                      <Form.Control type="password" placeholder="Password" />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                      <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group>
                     <Button
                       variant="primary"
                       type="submit"
                       className="site-btn site-btn-login mb-3"
                     >
-                      Login
+                      Submit
                     </Button>
+                 
                     <p>
-                      <Link to="/forget-password" className="mb-1">Forget Password?</Link>
-                    </p>
-                    <p>
-                      <Link to="/register" className="mb-2">Don't have an account? Signup Here</Link>
+                      <Link to="/register" className="mb-2">
+                        Don't have an account? Signup Here
+                      </Link>
                     </p>
                   </Form>
                 </Col>
                 <Col className="p-0 m-0 desktop" md={6} lg={6} sm={12} xs={12}>
                   <img
-                    src={login}
+                    src={forget}
                     alt="Login Image"
                     className="onboardBanner"
                   />
@@ -75,4 +68,4 @@ export class UserLogin extends Component {
   }
 }
 
-export default UserLogin;
+export default ForgetPassword;
