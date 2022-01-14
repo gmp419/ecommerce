@@ -32,6 +32,46 @@ export class AppRoute extends Component {
                     <Route exact path="/allcategory/:category" component={ProductCategoryPage} />
                     <Route exact path="/allsubcategory/:category/:subcategory" component={ProductSubcategoryPage} />
                     <Route exact path="/" component={HomePage} />
+                    <Route exact path="/" component={HomePage} />
+                    {/* <Route exact path="/" render={(props) => <HomePage {...props} key={Date.now()} /> } />
+
+                    <Route exact path="/login" render={(props) =>
+                        <UserLoginPage {...props} key={Date.now()} />
+                    } />
+                    <Route exact path="/contact" render={(props) =>
+                        <ContactPage {...props} key={Date.now()} />
+                    } />
+                    <Route exact path="/purchase" render={(props) =>
+                        <PurchasePage {...props} key={Date.now()} />
+                    } />
+                    <Route exact path="/privacy" render={(props) =>
+                        <PrivacyPage {...props} key={Date.now()} />
+                    } />
+                    <Route exact path="/refund" render={(props) =>
+                        <RefundPage {...props} key={Date.now()} />
+                    } />
+                    <Route exact path="/productdetails/:code" render={(props) =>
+                        <ProductDetailsPage {...props} key={Date.now()} />
+                    } />
+                    <Route exact path="/notification" render={(props) =>
+                        <NotificationPage {...props} key={Date.now()} />
+                    } />
+                    <Route exact path="/favourite" render={(props) =>
+                        <FavouritePage {...props} key={Date.now()} />
+                    } />
+                    <Route exact path="/cart" render={(props) =>
+                        <CartPage {...props} key={Date.now()} />
+                    } />
+                    <Route exact path="/about-us" render={(props) =>
+                        <AboutPage {...props} key={Date.now()} />
+                    } />
+                    <Route exact path="/allcategory/:category" render={(props) =>
+                        <ProductCategoryPage {...props} key={Date.now()} />
+                    } />
+                    <Route exact path="/allsubcategory/:category/:subcategory" render={(props) =>
+                        <ProductSubcategoryPage {...props} key={Date.now()} />
+                    } /> */}
+
 
                 </Switch>
             </Fragment>

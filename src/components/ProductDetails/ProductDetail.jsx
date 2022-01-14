@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { Container, Row, Col, Badge, Form } from "react-bootstrap";
-import Product1 from "../../assets/images/product/product1.png";
+import { Container, Row, Col, Badge, Form, Breadcrumb } from "react-bootstrap";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export class ProductDetail extends Component {
   constructor() {
@@ -39,9 +39,10 @@ export class ProductDetail extends Component {
           <div className="Product-price-card d-inline text-secondary ">
             <strike>$&nbsp; {price}</strike>
           </div>
-          
-          <div className="Product-price-card d-inline bg-success text-white">{cal}% off</div>
 
+          <div className="Product-price-card d-inline bg-success text-white">
+            {cal}% off
+          </div>
         </>
       );
     }
@@ -102,7 +103,21 @@ export class ProductDetail extends Component {
 
     return (
       <Fragment>
-        <Container className="BetweenTwoSection">
+        <Container className="BetweenTwoSection p-4">
+          <div className="breadBody m-0 mb-5">
+            <Breadcrumb className="m-0">
+              <Breadcrumb.Item className="m-0">
+                <Link to="/">Home</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item className="m-0">
+                <Link to={"/allcategory/" + category}>{category}</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item className="m-0">
+              <Link to={"/allsubcategory/"+category+"/"+subcategory}>{subcategory}</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item className="m-0">{title}</Breadcrumb.Item>
+            </Breadcrumb>
+          </div>
           <Row className="p-2">
             <Col
               className="shadow-sm bg-white pb-3 mt-4"

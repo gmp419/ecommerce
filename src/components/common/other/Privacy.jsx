@@ -7,12 +7,14 @@ import {
   Button,
   Card,
   FloatingLabel,
+  Breadcrumb,
 } from "react-bootstrap";
 import AppURL from "../../../api/AppURL";
 import parse from "html-react-parser";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 export class Privacy extends Component {
   constructor(props) {
@@ -53,7 +55,15 @@ export class Privacy extends Component {
   render() {
     return (
       <Fragment>
-        <Container className="">
+        <Container className="p-4">
+          <div className="breadBody m-0">
+            <Breadcrumb className="m-0">
+              <Breadcrumb.Item className="m-0">
+                <Link to="/">Home</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item className="m-0">Privacy</Breadcrumb.Item>
+            </Breadcrumb>
+          </div>
           <Row className="justify-content-center">
             <Col
               md={12}

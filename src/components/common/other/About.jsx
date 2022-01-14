@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { Component, Fragment } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Breadcrumb, Col, Container, Form, Row } from "react-bootstrap";
 import AppURL from "../../../api/AppURL";
 import parse from "html-react-parser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 export class About extends Component {
   constructor(props) {
@@ -47,6 +48,14 @@ export class About extends Component {
     return (
       <Fragment>
         <Container className="p-4">
+          <div className="breadBody m-0">
+            <Breadcrumb className="m-0">
+              <Breadcrumb.Item className="m-0">
+                <Link to="/">Home</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item className="m-0">About</Breadcrumb.Item>
+            </Breadcrumb>
+          </div>
           <Row className="justify-content-center">
             <Col
               md={12}
