@@ -14,7 +14,6 @@ import MegaMenuAll from "../home/MegaMenuAll";
 export class NavMenuDesktop extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       isOpen: "sideNavClose",
       isOverlay: "ContentOverlayClose",
@@ -25,7 +24,6 @@ export class NavMenuDesktop extends Component {
     this.searchOnClick = this.searchOnClick.bind(this);
     this.searchRedirect = this.searchRedirect.bind(this);
     this.MenuClick = this.MenuClick.bind(this);
-
   }
 
   searchItem = (e) => {
@@ -44,10 +42,9 @@ export class NavMenuDesktop extends Component {
 
   searchRedirect = () => {
     if (this.state.searchRedirect === true) {
-      return <Redirect to={"/search/" + this.state.searchResult} />; 
+      return <Redirect to={"/search/" + this.state.searchResult} />;
     }
   };
-
 
   MenuClick = () => {
     if (this.state.isOpen === "sideNavOpenDesktop") {
@@ -62,7 +59,41 @@ export class NavMenuDesktop extends Component {
       });
     }
   };
+
+  logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  };
+
   render() {
+    let button;
+
+    if (localStorage.getItem("token")) {
+      button = (
+        <>
+        <Link to="/profile" className="h4 btn mb-0  text-uppercase">
+          Profile
+        </Link>
+        <span>|</span>
+        <Link to="/" onClick={this.logout} className="h4 btn mb-0 text-uppercase">
+          LOGout
+        </Link>
+      </>
+      );
+    } else {
+      button = (
+        <>
+          <Link to="/login" className="h4 btn mb-0">
+            LOGIN
+          </Link>
+          <span>|</span>
+          <Link to="/register" className="h4 btn mb-0">
+            REGISTER
+          </Link>
+        </>
+      );
+    }
+
     return (
       <Fragment>
         <div className="navbar-wrapper">
@@ -100,7 +131,6 @@ export class NavMenuDesktop extends Component {
                       type="button"
                       className="btn site-btn"
                       onClick={this.searchOnClick}
-
                     >
                       <i className="fa fa-search"> </i>
                     </Button>
@@ -126,14 +156,8 @@ export class NavMenuDesktop extends Component {
                       <span className="badge text-white bg-danger">2</span>
                     </sup>
                   </Link>
-                  
-                  <Link to="/login" className="h4 btn mb-0">
-                    LOGIN
-                  </Link>
-                  <span>|</span>
-                  <Link to="/register" className="h4 btn mb-0">
-                    REGISTER
-                  </Link>
+
+                  {button}
 
                   <Link
                     to="cart"

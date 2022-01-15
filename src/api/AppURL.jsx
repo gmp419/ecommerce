@@ -35,6 +35,18 @@ class AppURL {
     return this.BaseURL + "/search/" + key;
   }
 
+  static login = this.BaseURL + "/login";
+
+  static register = this.BaseURL + "/register";
+
+  static forget_password = this.BaseURL + "/forget-password";
+
+  static UserResetPassword = this.BaseURL+"/reset-password"
+
+  static getUser = this.BaseURL + "/user";
+
+
+
 
 }
 

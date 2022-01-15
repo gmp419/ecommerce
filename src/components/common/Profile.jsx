@@ -1,8 +1,18 @@
 import React, { Component, Fragment } from "react";
 import { Card, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Redirect } from "react-router";
 
 export class Profile extends Component {
+ 
   render() {
+
+    if(!localStorage.getItem('token')){
+      return <Redirect to={"/login"} />;
+    }
+
+    let name = this.props.name;
+    let email = this.props.email;
+
     return (
       <Fragment>
         <Container >
@@ -17,8 +27,8 @@ export class Profile extends Component {
             {/* <Card> */}
               <Card.Header className="section-title my-2 p-2">User profile page</Card.Header>
               <ListGroup variant="flush">
-                <ListGroup.Item>Name: </ListGroup.Item>
-                <ListGroup.Item>Email:</ListGroup.Item>
+                <ListGroup.Item>Name: {name}</ListGroup.Item>
+                <ListGroup.Item>Email: {email} </ListGroup.Item>
               </ListGroup>
             {/* </Card> */}
             </Col>

@@ -15,11 +15,38 @@ import RefundPage from '../pages/RefundPage'
 import RegisterPage from '../pages/RegisterPage'
 import SearchPage from '../pages/SearchPage'
 import UserLoginPage from '../pages/UserLoginPage'
-import  ForgetPasswordPage  from '../pages/ForgetPasswordPage'
-import  ResetPasswordPage  from '../pages/ResetPasswordPage'
-import  ProfilePage  from '../pages/ProfilePage'
+import ForgetPasswordPage from '../pages/ForgetPasswordPage'
+import ResetPasswordPage from '../pages/ResetPasswordPage'
+import ProfilePage from '../pages/ProfilePage'
+import axios from 'axios'
+import AppURL from '../api/AppURL'
+import NavMenuDesktop from '../components/common/NavMenuDesktop'
+import MegaMenuAll from '../components/home/MegaMenuAll'
+import NavMenuMobile from '../components/common/NavMenuMobile'
 
 export class AppRoute extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            user: {}
+        }
+    }
+
+    componentDidMount() {
+        axios.get(AppURL.getUser).then(response => {
+            this.setUser(response.data)
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+
+
+    setUser = (user) => {
+        this.setState({ user: user })
+    }
+
+
     render() {
         return (
             <Fragment>
@@ -27,7 +54,7 @@ export class AppRoute extends Component {
                     <Route exact path="/login" component={UserLoginPage} />
                     <Route exact path="/register" component={RegisterPage} />
                     <Route exact path="/forget-password" component={ForgetPasswordPage} />
-                    <Route exact path="/reset-password/:id" component={ResetPasswordPage} />
+                    <Route exact path="/resetpassword/:id" component={ResetPasswordPage} />
                     <Route exact path="/contact" component={ContactPage} />
                     <Route exact path="/purchase" component={PurchasePage} />
                     <Route exact path="/privacy" component={PrivacyPage} />
@@ -43,6 +70,9 @@ export class AppRoute extends Component {
                     <Route exact path="/profile" component={ProfilePage} />
 
                     <Route exact path='/search/:search' component={SearchPage} />
+
+                    <NavMenuDesktop user={this.state.user} setUser={this.setUser} />
+                    <NavMenuMobile user={this.state.user} setUser={this.setUser} />
 
 
 
