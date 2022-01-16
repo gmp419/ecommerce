@@ -68,13 +68,10 @@ export class AppRoute extends Component {
                     <Route exact path="/allsubcategory/:category/:subcategory" component={ProductSubcategoryPage} />
                     <Route exact path="/" component={HomePage} />
                     <Route exact path="/profile" component={ProfilePage} />
-
                     <Route exact path='/search/:search' component={SearchPage} />
-
+                    {/* <Route exact path='/suggested/:key' component={SuggestedProduct} /> */}
                     <NavMenuDesktop user={this.state.user} setUser={this.setUser} />
                     <NavMenuMobile user={this.state.user} setUser={this.setUser} />
-
-
 
 
                     {/* <Route exact path="/" render={(props) => <HomePage {...props} key={Date.now()} /> } />

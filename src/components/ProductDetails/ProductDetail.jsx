@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Container, Row, Col, Badge, Form, Breadcrumb } from "react-bootstrap";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import ReviewList from "./ReviewList";
 
 export class ProductDetail extends Component {
   constructor() {
@@ -13,7 +14,12 @@ export class ProductDetail extends Component {
   imageClick(e) {
     let source = e.target.src;
     let image = document.getElementById("previewImage");
+
     image.src = source;
+    image.style.display = "block";
+
+    image.style.objectFit = "contain";
+    image.style.objectPosition = "center";
   }
 
   priceOption(price, offer_price) {
@@ -66,6 +72,7 @@ export class ProductDetail extends Component {
       product_code,
       color,
       size,
+      product_id
     } = this.newMethod();
 
     var colorDiv = "d-none";
@@ -101,6 +108,7 @@ export class ProductDetail extends Component {
       sizeDiv = "d-none";
     }
 
+
     return (
       <Fragment>
         <Container className="BetweenTwoSection p-4">
@@ -113,7 +121,9 @@ export class ProductDetail extends Component {
                 <Link to={"/allcategory/" + category}>{category}</Link>
               </Breadcrumb.Item>
               <Breadcrumb.Item className="m-0">
-              <Link to={"/allsubcategory/"+category+"/"+subcategory}>{subcategory}</Link>
+                <Link to={"/allsubcategory/" + category + "/" + subcategory}>
+                  {subcategory}
+                </Link>
               </Breadcrumb.Item>
               <Breadcrumb.Item className="m-0">{title}</Breadcrumb.Item>
             </Breadcrumb>
@@ -130,7 +140,7 @@ export class ProductDetail extends Component {
                 <Col className="p-3" md={6} lg={6} sm={12} xs={12}>
                   <img
                     id="previewImage"
-                    className="w-100"
+                    className="w-75 h-auto"
                     src={product_image}
                   />
                   <Container className="my-3">
@@ -242,50 +252,8 @@ export class ProductDetail extends Component {
 
                 <Col className="" md={6} lg={6} sm={12} xs={12}>
                   <h6 className="mt-2">REVIEWS</h6>
-                  <p className=" p-0 m-0">
-                    <span className="Review-Title">Kazi Ariyan</span>{" "}
-                    <span className="text-success">
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                    </span>{" "}
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                    magna aliquam erat volutpat.
-                  </p>
 
-                  <p className=" p-0 m-0">
-                    <span className="Review-Title">Kazi Ariyan</span>{" "}
-                    <span className="text-success">
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                    </span>{" "}
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                    magna aliquam erat volutpat.
-                  </p>
-
-                  <p className=" p-0 m-0">
-                    <span className="Review-Title">Kazi Ariyan</span>{" "}
-                    <span className="text-success">
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                    </span>{" "}
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                    magna aliquam erat volutpat.
-                  </p>
+                  <ReviewList code={product_id} />
                 </Col>
               </Row>
             </Col>
@@ -331,6 +299,9 @@ export class ProductDetail extends Component {
     let short_description = productAllData["productDetails"]
       ? productAllData["productDetails"][0]["short_description"]
       : "";
+    let product_id = productAllData["productDetails"]
+      ? productAllData["productDetails"][0]["product_id"]
+      : "";
     let long_description = productAllData["productDetails"]
       ? productAllData["productDetails"][0]["long_description"]
       : "";
@@ -367,6 +338,7 @@ export class ProductDetail extends Component {
       category,
       subcategory,
       product_code,
+      product_id,
       color,
       size,
     };

@@ -45,7 +45,13 @@ class AppURL {
 
   static getUser = this.BaseURL + "/user";
 
+  static similarProduct(code) {
+    return this.BaseURL + "/suggested-product/" + code;
+  }
 
+  static reviews(code) {
+    return this.BaseURL + "/review/" + code;
+  }
 
 
 }

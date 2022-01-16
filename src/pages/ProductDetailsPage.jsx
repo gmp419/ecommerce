@@ -18,6 +18,7 @@ export class ProductDetailsPage extends Component {
       product: [],
       loading: "",
       display: "d-none",
+      suggestProduct: [],
     };
   }
 
@@ -31,13 +32,33 @@ export class ProductDetailsPage extends Component {
           loading: "d-none",
           display: "",
         });
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
+  // UNSAFE_componentWillMount() {
+    
+
+  //   axios
+  //   .get(AppURL.similarProduct("samsung"))
+  //   .then((res) => {
+  //     this.setState({
+  //       suggestProduct: res.data,
+  //     });
+  //     console.log(res.data);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  // }
   render() {
+    let productAllData = this.state.product;
+    let subcategory = productAllData["productList"]
+    ? productAllData["productList"][0]["subcategory"]
+    : "";
+    
     return (
       <Fragment>
         <div className="desktop">
@@ -64,7 +85,7 @@ export class ProductDetailsPage extends Component {
         </div>
         <div className={this.state.display}>
           <ProductDetail data={this.state.product} />
-          <SuggestedProduct />
+          {/* <SuggestedProduct data={subcategory} /> */}
         </div>
         <div className="desktop">
           <FooterDesktop />
