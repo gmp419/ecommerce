@@ -2,22 +2,29 @@ import React, { Component, Fragment } from "react";
 import { Container, Row, Col, Badge, Form, Breadcrumb } from "react-bootstrap";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import ReviewList from "./ReviewList";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AppURL from "../../api/AppURL";
+import axios from "axios";
 
 export class ProductDetail extends Component {
   constructor() {
     super();
     this.state = {
       product: [],
+      color: "",
+      size: "",
+      quantity: 1,
+      product_code: null,
+      addToCart: "Add to Cart",
     };
   }
 
   imageClick(e) {
     let source = e.target.src;
     let image = document.getElementById("previewImage");
-
     image.src = source;
     image.style.display = "block";
-
     image.style.objectFit = "contain";
     image.style.objectPosition = "center";
   }
@@ -54,6 +61,101 @@ export class ProductDetail extends Component {
     }
   }
 
+  addToCart = (e) => {
+    let size = this.state.size;
+    let color = this.state.color;
+    let quantity = this.state.quantity;
+    let product_code = document
+      .getElementById("productCode")
+      .getAttribute("value");
+
+    if (size == "") {
+      toast.error("Please select size", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+
+    if (color == "") {
+      toast.error("Please select color", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+
+    if (localStorage.getItem("token") == null) {
+      toast.error("Please Login First", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    let user = localStorage.getItem("user");
+
+    let email = JSON.parse(user).email;
+
+    if (size != "" && color != "") {
+      this.setState({
+        addToCart: "Adding...",
+      });
+      let MyFormData = new FormData();
+      MyFormData.append("user_email", email);
+      MyFormData.append("product_code", product_code);
+      MyFormData.append("product_size", size);
+      MyFormData.append("color", color);
+      MyFormData.append("quantity", quantity);
+
+      axios
+        .post(AppURL.add_to_cart, MyFormData)
+        .then((res) => {
+          if (res.status == 200) {
+            this.setState({
+              addToCart: "Added to Cart",
+            });
+            toast.success("Added to Cart", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          } else {
+            this.setState({
+              addToCart: "Add to Cart",
+            });
+            toast.error("Something went wrong. Please try again later!", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   render() {
     let {
       product_image,
@@ -72,7 +174,7 @@ export class ProductDetail extends Component {
       product_code,
       color,
       size,
-      product_id
+      product_id,
     } = this.newMethod();
 
     var colorDiv = "d-none";
@@ -108,6 +210,19 @@ export class ProductDetail extends Component {
       sizeDiv = "d-none";
     }
 
+    // if(product_code){
+    //   this.setState({
+    //     product_code: product_code
+    //   })
+    // }
+
+    // if (this.state.product_code === null) {
+
+    //   console.log(code);
+    //   this.setState({
+    //     product_code: product_code,
+    //   });
+    // }
 
     return (
       <Fragment>
@@ -188,7 +303,14 @@ export class ProductDetail extends Component {
                     className={"form-inline w-50 col-auto mt-1 " + colorDiv}
                   >
                     <h6 className="mt-2">Choose Color</h6>
-                    <Form.Select defaultValue="Choose...">
+                    <Form.Select
+                      defaultValue="Choose..."
+                      required
+                      onChange={(e) => {
+                        e.preventDefault();
+                        this.setState({ color: e.target.value });
+                      }}
+                    >
                       <option>Choose...</option>
                       {colorOption}
                     </Form.Select>
@@ -199,8 +321,15 @@ export class ProductDetail extends Component {
                     className={"form-inline w-50 col-auto mt-1" + sizeDiv}
                   >
                     <h6 className="mt-2">Choose Size</h6>
-                    <Form.Select defaultValue="Choose...">
-                      <option>Choose...</option>
+                    <Form.Select
+                      defaultValue="Choose..."
+                      required
+                      onChange={(e) => {
+                        e.preventDefault();
+                        this.setState({ size: e.target.value });
+                      }}
+                    >
+                      <option required>Choose...</option>
                       {sizeOption}
                     </Form.Select>
                   </Form.Group>
@@ -211,6 +340,11 @@ export class ProductDetail extends Component {
                     type="number"
                     placeholder="1"
                     name="quantity"
+                    required
+                    onChange={(e) => {
+                      e.preventDefault();
+                      this.setState({ quantity: e.target.value });
+                    }}
                   />
 
                   <div className="mt-2 text-capitalize">
@@ -224,13 +358,25 @@ export class ProductDetail extends Component {
                     <Badge bg="dark">{brand}</Badge>{" "}
                   </div>
                   <div className="mt-2 text-capitalize">
-                    <b>Product code:</b>&nbsp; {product_code}
+                    <b>Product code:</b>&nbsp;{" "}
+                    <button
+                      id="productCode"
+                      className="bg-none border-0"
+                      value={product_code}
+                    >
+                      {" "}
+                      {product_code}
+                    </button>
                   </div>
 
                   <div className="input-group mt-3">
-                    <button className="btn site-btn m-1 ">
+                    <button
+                      className="btn site-btn m-1 "
+                      onClick={this.addToCart}
+                    >
                       {" "}
-                      <i className="fa fa-shopping-cart"></i> Add To Cart
+                      <i className="fa fa-shopping-cart"></i>{" "}
+                      {this.state.addToCart}
                     </button>
                     <button className="btn btn-primary m-1">
                       {" "}
@@ -259,6 +405,7 @@ export class ProductDetail extends Component {
             </Col>
           </Row>
         </Container>
+        <ToastContainer />
       </Fragment>
     );
   }

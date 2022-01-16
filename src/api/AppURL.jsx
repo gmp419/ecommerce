@@ -53,6 +53,8 @@ class AppURL {
     return this.BaseURL + "/review/" + code;
   }
 
+  static add_to_cart = this.BaseURL + "/add-to-cart";
+
 
 }
 
