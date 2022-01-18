@@ -1,15 +1,10 @@
 import React, { Component, Fragment } from "react";
-import {
-  Button,
-  Col,
-  Container,
-  Navbar,
-  NavDropdown,
-  Row,
-} from "react-bootstrap";
+import { Button, Col, Container, Navbar, Row } from "react-bootstrap";
 import logo from "../../assets/images/easyshop.png";
 import { Link, Redirect } from "react-router-dom";
 import MegaMenuAll from "../home/MegaMenuAll";
+import axios from "axios";
+import AppURL from "../../api/AppURL";
 
 export class NavMenuDesktop extends Component {
   constructor(props) {
@@ -19,11 +14,30 @@ export class NavMenuDesktop extends Component {
       isOverlay: "ContentOverlayClose",
       searchResult: "",
       searchRedirect: false,
+      cartCount: 0,
     };
     this.searchItem = this.searchItem.bind(this);
     this.searchOnClick = this.searchOnClick.bind(this);
     this.searchRedirect = this.searchRedirect.bind(this);
     this.MenuClick = this.MenuClick.bind(this);
+  }
+
+  componentDidMount() {
+   
+    if (localStorage.getItem("user")) {
+      let user = localStorage.getItem("user");
+      let email = JSON.parse(user).email;
+
+      console.log(email);
+      axios
+        .get(AppURL.cartCount(email))
+        .then((res) => {
+          this.setState({ cartCount: res.data.result });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   searchItem = (e) => {
@@ -71,14 +85,18 @@ export class NavMenuDesktop extends Component {
     if (localStorage.getItem("token")) {
       button = (
         <>
-        <Link to="/profile" className="h4 btn mb-0  text-uppercase">
-          Profile
-        </Link>
-        <span>|</span>
-        <Link to="/" onClick={this.logout} className="h4 btn mb-0 text-uppercase">
-          LOGout
-        </Link>
-      </>
+          <Link to="/profile" className="h4 btn mb-0  text-uppercase">
+            Profile
+          </Link>
+          <span>|</span>
+          <Link
+            to="/"
+            onClick={this.logout}
+            className="h4 btn mb-0 text-uppercase"
+          >
+            LOGout
+          </Link>
+        </>
       );
     } else {
       button = (
@@ -163,7 +181,8 @@ export class NavMenuDesktop extends Component {
                     to="cart"
                     className="cart-btn mb-0 d-flex justify-content-center align-items-center text-decoration-none"
                   >
-                    <i className="fa fa-shopping-cart"></i>&nbsp;3{" "}
+                    <i className="fa fa-shopping-cart"></i>&nbsp;
+                    {this.state.cartCount}
                   </Link>
                 </Col>
               </Row>

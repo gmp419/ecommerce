@@ -55,6 +55,10 @@ class AppURL {
 
   static add_to_cart = this.BaseURL + "/add-to-cart";
 
+  static cartCount(email) {
+    return this.BaseURL + "/cart-count/" + email;
+  }
+
 
 }
 

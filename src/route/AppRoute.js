@@ -34,6 +34,7 @@ export class AppRoute extends Component {
     }
 
     componentDidMount() {
+        
         axios.get(AppURL.getUser).then(response => {
             this.setUser(response.data)
         }).catch(error => {

@@ -3,6 +3,8 @@ import { Button, Col, Container, Navbar, Row } from "react-bootstrap";
 import logo from "../../assets/images/easyshop.png";
 import { Link } from "react-router-dom";
 import MegaMenuMobile from "../home/MegaMenuMobile";
+import axios from "axios";
+import AppURL from "../../api/AppURL";
 
 export class NavMenuMobile extends Component {
   constructor(props) {
@@ -10,6 +12,7 @@ export class NavMenuMobile extends Component {
     this.state = {
       isOpen: "sideNavClose",
       isOverlay: "ContentOverlayClose",
+      cartCount: 0,
     };
   }
 
@@ -27,6 +30,21 @@ export class NavMenuMobile extends Component {
     }
   };
 
+  componentDidMount() {
+    if (localStorage.getItem("user")) {
+      let user = localStorage.getItem("user");
+      let email = JSON.parse(user).email;
+      console.log(email);
+      axios
+        .get(AppURL.cartCount(email))
+        .then((res) => {
+          this.setState({ cartCount: res.data.result });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
   render() {
     return (
       <Fragment>
@@ -44,8 +62,12 @@ export class NavMenuMobile extends Component {
                   <img className="nav-logo" src={logo} />
                 </Link>
 
-                <Link to="cart" className="cart-btn d-flex text-decoration-none justify-content-center align-items-center ms-auto">
-                  <i className="fa fa-shopping-cart"></i>&nbsp; 3
+                <Link
+                  to="cart"
+                  className="cart-btn d-flex text-decoration-none justify-content-center align-items-center ms-auto"
+                >
+                  <i className="fa fa-shopping-cart"></i>&nbsp;{" "}
+                  {this.state.cartCount}
                 </Link>
               </Col>
             </Row>

@@ -135,6 +135,7 @@ export class ProductDetail extends Component {
               draggable: true,
               progress: undefined,
             });
+            window.location.reload();
           } else {
             this.setState({
               addToCart: "Add to Cart",
@@ -382,7 +383,7 @@ export class ProductDetail extends Component {
                       {" "}
                       <i className="fa fa-car"></i> Order Now
                     </button>
-                    <button className="btn btn-secondary m-1">
+                    <button className="btn bg-success text-white m-1">
                       {" "}
                       <i className="fa fa-heart"></i> Favourite
                     </button>
