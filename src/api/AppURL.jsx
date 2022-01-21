@@ -59,6 +59,22 @@ class AppURL {
     return this.BaseURL + "/cart-count/" + email;
   }
 
+  static addToFavourite(product_code, email) {
+    return (
+      this.BaseURL + "/add-to-favorite/" + product_code + "/" + email
+    );
+  }
+
+  static favouriteList(email) {
+    return this.BaseURL + "/favorite-list/" + email;
+  }
+
+  static removeFavourite(product_code, email) {
+    return (
+      this.BaseURL + "/remove-favorite/" + product_code + "/" + email
+    );
+  }
+
 
 }
 

@@ -17,6 +17,7 @@ export class ProductDetail extends Component {
       quantity: 1,
       product_code: null,
       addToCart: "Add to Cart",
+      addFavourite: 'Add to Favourite',
     };
   }
 
@@ -140,6 +141,58 @@ export class ProductDetail extends Component {
             this.setState({
               addToCart: "Add to Cart",
             });
+            toast.error("Something went wrong. Please try again later!", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  addToFavourite = (e) => {
+    if (localStorage.getItem("token") == null) {
+      toast.error("Please Login First", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      let product_code = document
+        .getElementById("productCode")
+        .getAttribute("value");
+      let user = localStorage.getItem("user");
+      let email = JSON.parse(user).email;
+
+      axios
+        .get(AppURL.addToFavourite(product_code, email))
+        .then((res) => {
+          if (res.status == 200) {
+            toast.success("Added to Favourite", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            this.setState({
+              addFavourite: "Added Successfully",
+            });
+          } else {
             toast.error("Something went wrong. Please try again later!", {
               position: "top-center",
               autoClose: 5000,
@@ -383,9 +436,12 @@ export class ProductDetail extends Component {
                       {" "}
                       <i className="fa fa-car"></i> Order Now
                     </button>
-                    <button className="btn bg-success text-white m-1">
+                    <button
+                      className="btn bg-success text-white m-1"
+                      onClick={this.addToFavourite}
+                    >
                       {" "}
-                      <i className="fa fa-heart"></i> Favourite
+                      <i className="fa fa-heart"></i> {this.state.addFavourite}
                     </button>
                   </div>
                 </Col>
