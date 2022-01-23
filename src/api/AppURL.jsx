@@ -59,6 +59,16 @@ class AppURL {
     return this.BaseURL + "/cart-count/" + email;
   }
 
+  static cartList(email) {
+    return this.BaseURL + "/cart-list/" + email;
+  }
+
+  static deleteFromCart(email, id) {
+    return (
+      this.BaseURL + "/remove-cart-item/" + email + "/" + id
+    );
+  }
+
   static addToFavourite(product_code, email) {
     return (
       this.BaseURL + "/add-to-favorite/" + product_code + "/" + email
@@ -74,6 +84,23 @@ class AppURL {
       this.BaseURL + "/remove-favorite/" + product_code + "/" + email
     );
   }
+
+  static cartItemPlus(id, quanity, price) {
+    return (
+      this.BaseURL + "/cartItemPlus/" + id + "/" + quanity + "/" + price
+    );
+  }
+
+  static cartItemMinus(id, quanity, price) {
+    return (
+      this.BaseURL + "/cartItemMinus/" + id + "/" + quanity + "/" + price
+    );
+  }
+
+  static order(email) {
+    return this.BaseURL + "/order/" + email;
+  }
+
 
 
 }

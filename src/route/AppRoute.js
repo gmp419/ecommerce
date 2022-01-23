@@ -23,6 +23,7 @@ import AppURL from '../api/AppURL'
 import NavMenuDesktop from '../components/common/NavMenuDesktop'
 import MegaMenuAll from '../components/home/MegaMenuAll'
 import NavMenuMobile from '../components/common/NavMenuMobile'
+import OrderHistory from '../pages/OrderHistory'
 
 export class AppRoute extends Component {
 
@@ -70,9 +71,13 @@ export class AppRoute extends Component {
                     <Route exact path="/" component={HomePage} />
                     <Route exact path="/profile" component={ProfilePage} />
                     <Route exact path='/search/:search' component={SearchPage} />
+                    <Route exact path='/orders' component={OrderHistory} />
+
                     {/* <Route exact path='/suggested/:key' component={SuggestedProduct} /> */}
                     <NavMenuDesktop user={this.state.user} setUser={this.setUser} />
                     <NavMenuMobile user={this.state.user} setUser={this.setUser} />
+
+
 
 
                     {/* <Route exact path="/" render={(props) => <HomePage {...props} key={Date.now()} /> } />

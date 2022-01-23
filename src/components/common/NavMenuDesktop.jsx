@@ -28,7 +28,6 @@ export class NavMenuDesktop extends Component {
       let user = localStorage.getItem("user");
       let email = JSON.parse(user).email;
 
-      console.log(email);
       axios
         .get(AppURL.cartCount(email))
         .then((res) => {
@@ -178,7 +177,7 @@ export class NavMenuDesktop extends Component {
                   {button}
 
                   <Link
-                    to="cart"
+                    to="/cart"
                     className="cart-btn mb-0 d-flex justify-content-center align-items-center text-decoration-none"
                   >
                     <i className="fa fa-shopping-cart"></i>&nbsp;
