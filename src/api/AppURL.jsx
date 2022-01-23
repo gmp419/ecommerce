@@ -101,7 +101,9 @@ class AppURL {
     return this.BaseURL + "/order/" + email;
   }
 
-
+  static orderHistory(email) {
+    return this.BaseURL + "/order-history/" + email;
+  }
 
 }
 

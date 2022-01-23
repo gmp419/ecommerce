@@ -8,6 +8,7 @@ import NavMenuDesktop from "../components/common/NavMenuDesktop";
 import NavMenuMobile from "../components/common/NavMenuMobile";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Redirect } from "react-router";
 
 export class CartPage extends Component {
   constructor() {
@@ -50,6 +51,9 @@ export class CartPage extends Component {
     }
   }
   render() {
+    if (!localStorage.getItem("token")) {
+      return <Redirect to={"/login"} />;
+    }
     return (
       <Fragment>
         <div className="desktop">

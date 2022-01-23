@@ -6,6 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AppURL from "../../api/AppURL";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
+
 
 export class ProductDetail extends Component {
   constructor() {
@@ -18,6 +20,8 @@ export class ProductDetail extends Component {
       product_code: null,
       addToCart: "Add to Cart",
       addFavourite: 'Add to Favourite',
+      orderNowButton: 'Order Now',
+      pageRedirect: false,
     };
   }
 
@@ -209,6 +213,110 @@ export class ProductDetail extends Component {
         });
     }
   };
+
+  orderNow = (e) => {
+      let size = this.state.size;
+      let color = this.state.color;
+      let quantity = this.state.quantity;
+      let product_code = document
+        .getElementById("productCode")
+        .getAttribute("value");
+  
+      if (size == "") {
+        toast.error("Please select size", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+  
+      if (color == "") {
+        toast.error("Please select color", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+  
+      if (localStorage.getItem("token") == null) {
+        toast.error("Please Login First", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      let user = localStorage.getItem("user");
+  
+      let email = JSON.parse(user).email;
+  
+      if (size != "" && color != "") {
+        // this.setState({
+        //   orderNowButton: "Adding...",
+        // });
+        let MyFormData = new FormData();
+        MyFormData.append("user_email", email);
+        MyFormData.append("product_code", product_code);
+        MyFormData.append("product_size", size);
+        MyFormData.append("color", color);
+        MyFormData.append("quantity", quantity);
+  
+        axios
+          .post(AppURL.add_to_cart, MyFormData)
+          .then((res) => {
+            if (res.status == 200) {
+              this.setState({
+                // orderNowButton: "Added to Cart",
+                pageRedirect: true,
+              });
+              toast.success("Added to Cart", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            } else {
+              this.setState({
+                orderNowButton: "Add to Cart",
+              });
+              toast.error("Something went wrong. Please try again later!", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+  };
+
+  pageRedirectTo = () => {
+    if (this.state.pageRedirect === true) {
+      return <Redirect to="/cart" />;
+    }
+  };
+
+
 
   render() {
     let {
@@ -432,9 +540,10 @@ export class ProductDetail extends Component {
                       <i className="fa fa-shopping-cart"></i>{" "}
                       {this.state.addToCart}
                     </button>
-                    <button className="btn btn-primary m-1">
-                      {" "}
-                      <i className="fa fa-car"></i> Order Now
+                    <button className="btn btn-primary m-1"
+                      onClick={this.orderNow}
+                    >
+                      <i className="fa fa-car"></i> {this.state.orderNowButton}
                     </button>
                     <button
                       className="btn bg-success text-white m-1"
@@ -463,6 +572,7 @@ export class ProductDetail extends Component {
           </Row>
         </Container>
         <ToastContainer />
+        {this.pageRedirectTo()}
       </Fragment>
     );
   }

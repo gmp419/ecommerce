@@ -158,6 +158,7 @@ export class Cart extends Component {
         MyFormData.append("delivery_charge", "0");
         MyFormData.append("urgent_delivery", "no");
         MyFormData.append("order_status", "pending");
+      
 
         axios.post(AppURL.order(email), MyFormData)
         .then((res) => {
